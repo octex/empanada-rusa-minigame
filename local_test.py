@@ -1,26 +1,38 @@
-from random import randrange
+from random import randrange, choice
 
 AMOUNT_EMPANADAS = 4
+GOOD_EMPANADAS = ("carne a cuchillo", "jamon y queso", "humita", "carne picante", "atun",
+                  "caprese", "roquefort con jamon", "pollo", "verdura", "carne suave",
+                  "panceta y ciruela", "queso al verdeo")
+BAD_EMPANADAS = ("culo", "cemento", "caca", "vomito", "pegamento", "merca", "waska",
+                 "barro", "menarca", "plomo", "pelos anales", "vello pubico", "clavos",
+                 "pija", "prensado")
+
+
+#class Player:
+#    def __init__(self, name, address):
+#        self.name = name
+#        self.address = address
 
 
 class Empanada:
-    def __init__(self, type, is_it=False):
-        self.type = type
-        self.is_it = is_it
+    def __init__(self, is_bad=False):
+        self.is_bad = is_bad
+        if self.is_bad:
+            self.taste = choice(BAD_EMPANADAS)
+        else:
+            self.taste = choice(GOOD_EMPANADAS)
     def get_type(self):
-        return self.type
-    def is_the_one(self):
-        return self.is_it
+        return self.taste
+    def is_the_bad_one(self):
+        return self.is_bad
 
 def check_if_only_one(empanadas):
     counter = 0
     for empanada in empanadas:
         if empanada is not None:
             counter += 1
-    if counter == 1:
-        return True
-    else:
-        return False
+    return counter == 1
 
 
 def generate_emp(amount):
@@ -28,10 +40,10 @@ def generate_emp(amount):
     random_bad = randrange(amount)
     for _ in range(amount):
         if _ == random_bad:
-            temp_emp = Empanada(type="CULO", is_it=True)
+            temp_emp = Empanada(is_bad=True)
             tmp_empanadas.append(temp_emp)
         else:
-            temp_emp = Empanada(type="carne")
+            temp_emp = Empanada()
             tmp_empanadas.append(temp_emp)
     return tmp_empanadas
 
@@ -55,7 +67,7 @@ while True:
             empanada_elegida = empanadas[tmp_index]
             try:
                 empanada_elegida_sabor = empanada_elegida.get_type()
-                if empanada_elegida.is_the_one():
+                if empanada_elegida.is_the_bad_one():
                     print(f"Noooooooo te comiste la empanada de {empanada_elegida_sabor}!!!!11!1")
                     print("Malardo amigo")
                     print("************************GAME OVER************************")
