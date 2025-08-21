@@ -1,2 +1,2 @@
 # empanada-rusa-server
-Codigo del servidor dedicado para el juego empanada rusa
+Minijuego donde hay que elegir todas las empanadas que no sean de gustos feos
